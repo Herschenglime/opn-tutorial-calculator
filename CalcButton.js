@@ -7,6 +7,9 @@ var CalcButton=function(input){
 	
 };
 
+CalcButton.prototype.doSomething = function(input){
+    console.log("testing testing 123")
+}
 //Define public methods of the class like that:
 CalcButton.prototype.method1=function(input){
 	

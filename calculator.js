@@ -52,9 +52,12 @@ var main=function(args)
 	
 	var my_button=new Button("A button");
 	left.append(my_button);
-	
+
+    var testbutt = new CalcButton()
+
 	my_button.whenClicked().then((my_button)=>{
 		console.log("I clicked the button!");
+    testbutt.doSomething()
 	})
-	
+
 }
