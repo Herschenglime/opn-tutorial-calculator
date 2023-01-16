@@ -50,28 +50,28 @@ var main = function (args) {
 	var my_label = new Label("Calculator Entry");
 	left.append(my_label);
 
-	var entryBox = new TextField({ name: entryBox, value: "test" })
+	var entryBox = new TextField({ name: entryBox, placeholder: "Press some buttons" })
 	entryBox.setEditable(false)
 	left.append(entryBox)
+
+
 
 	var numberButtons = new ButtonGroup()
 	numberButtons.columns = 3
 	numberButtons.orientation = 'matrix'
 
-
+    
 	//wacky for loop to put buttons in convenient order
 	for (let i = 7; i > 0; i -= 3) {
 
 		for (let j = 0; j < 3; j++) {
-			let passedButton = new CalcButton((i + j).toString()).internalButton
+			let passedButton = new CalcButton((i+j).toString()).internalButton
 			passedButton.action = () => console.log(i + " pressed")
 
 
 			numberButtons.append(passedButton)
 		}
 	}
-
-	numberButtons.append(passedButton)
 
 	left.append(numberButtons)
 
