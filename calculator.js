@@ -63,7 +63,6 @@ var main = function (args) {
 	})
 
     var traceSpace = new ElementGroup()
-    traceSpace.append(new Label("test"))
 
     right.append(traceSpace)
 
@@ -106,8 +105,10 @@ var main = function (args) {
 	functionButtons.columns = 3
 	functionButtons.orientation = 'matrix'
 
+    //= button functionality
     functionButtons.append(new CalcButton("=", () => {
-
+        traceSpace.append(new Label(entryVal))
+        entryVal = ""
     }).internalButton)
 
     left.append(functionButtons)
