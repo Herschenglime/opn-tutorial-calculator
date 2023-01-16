@@ -1,33 +1,22 @@
+preload(libs['GUI'])
 
 //Constructor of the class
-var CalcButton=function(input){
-	
-	//define properties of the class like that
-	this.property1=100;
-	
+var CalcButton=function(label){
+
+    this.internalButton = new Button(label)
+    this.action = () => console.log(label + " button pressed!")
+
+    this.internalButton.whenClicked().then(()=>{
+        this.action()
+    })
+
+
+    // DO NOT RETURN ANYTHING OR IT BREAKS USING CLASS METHODS
 };
 
 CalcButton.prototype.doSomething = function(input){
-    console.log("testing testing 123")
+    this.action()
 }
-//Define public methods of the class like that:
-CalcButton.prototype.method1=function(input){
-	
-	//if you have a local function defined inside a method it MUST be declared like that:
-	//DO NOT USE THE "function(arguments){...}" notation because you will not be able to access the keyword "this".
-	var a_local_function_that_returns_a_string=(a,b,c)=>{
-		
-		//the code of the local function goes here
-		
-		return "This is a string. The value of property1 is: "+this.property1;
-		
-	};
-	
-	//access properties of this class like that:
-	var value=this.property1;
-	
-	return a_local_function_that_returns_a_string();
-};
 
 
 var main=function(args){
