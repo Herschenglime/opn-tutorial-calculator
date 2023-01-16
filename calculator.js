@@ -127,12 +127,22 @@ var main = function (args) {
             if (lastPress) {
                 if (lastPress === "+") {
                     currVal += Number(entryVal)
-                } else if (lastPress === "-") {
+                }
+
+                else if (lastPress === "-") {
                     currVal -= Number(entryVal)
                 }
 
+                else if (lastPress === "*") {
+                    currVal *= Number(entryVal)
+                }
+
+                else if (lastPress === "/") {
+                    currVal /= Number(entryVal)
+                }
+
             } else {
-                    currVal = Number(entryVal)
+                currVal = Number(entryVal)
                 console.log("current val: " + currVal)
             }
 
@@ -145,25 +155,65 @@ var main = function (args) {
     functionButtons.append(
         generateButton("+",
             () => {
+                currLineText += `${entryVal} + `
+                currLine.setText(currLineText)
+                traceSpace.append(currLine)
+
                 handlePrevPress(lastPress)
                 lastPress = "+"
+
             })
     )
 
     functionButtons.append(
         generateButton("-",
             () => {
+                currLineText += `${entryVal} - `
+                currLine.setText(currLineText)
+                traceSpace.append(currLine)
+
                 handlePrevPress(lastPress)
                 lastPress = "-"
             })
     )
 
     functionButtons.append(
+        generateButton("*",
+            () => {
+                currLineText += `${entryVal} * `
+                currLine.setText(currLineText)
+                traceSpace.append(currLine)
+
+                handlePrevPress(lastPress)
+                lastPress = "*"
+            })
+    )
+
+    functionButtons.append(
+        generateButton("/",
+            () => {
+                currLineText += `${entryVal} / `
+                currLine.setText(currLineText)
+                traceSpace.append(currLine)
+
+                handlePrevPress(lastPress)
+                lastPress = "/"
+            })
+    )
+
+    functionButtons.append(
         generateButton("=",
             () => {
+                currLineText += `${entryVal}`
+                currLine.setText(currLineText)
+                traceSpace.append(currLine)
+
                 handlePrevPress(lastPress)
                 lastPress = undefined
                 traceSpace.append(new Label(currVal))
+
+                currLineText = ""
+                currLine = new Label()
 
             })
     )
