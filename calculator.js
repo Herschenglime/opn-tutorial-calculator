@@ -93,6 +93,11 @@ var main = function (args) {
         }
     }
 
+    numberButtons.append(new CalcButton("0", () => {
+        entryVal += 0
+        entryBox.setText(entryVal)
+    }).internalButton)
+
     left.append(numberButtons)
 
     //whenClicked example
@@ -112,81 +117,56 @@ var main = function (args) {
     functionButtons.columns = 4
     functionButtons.orientation = 'matrix'
 
-    functionButtons.append(new CalcButton("+", () => {
+
+    function generateButton(label, action) {
+        return new CalcButton(label, action).internalButton
+    }
+
+    function handlePrevPress(lastPress) {
         if (entryVal !== "") {
-            if (lastPress) currLineText += ` ${lastPress} ${entryVal}`
-            else
-                currLineText = entryVal
-            currVal += parseInt(entryVal)
-            currLine.setText(currLineText)
-            lastPress = "+"
-            entryVal = ""
-        }
-    }).internalButton)
+            if (lastPress) {
+                if (lastPress === "+") {
+                    currVal += Number(entryVal)
+                } else if (lastPress === "-") {
+                    currVal -= Number(entryVal)
+                }
 
-    functionButtons.append(new CalcButton("-", () => {
-        if (entryVal !== "") {
-            if (lastPress) currLineText -= ` ${lastPress} ${entryVal}`
-            else
-                currLineText = entryVal
-            currVal -= parseInt(entryVal)
-            currLine.setText(currLineText)
-            lastPress = "-"
-            entryVal = ""
-        }
-    }).internalButton)
-
-    functionButtons.append(new CalcButton("*", () => {
-        if (entryVal !== "") {
-            if (lastPress) currLineText *= ` ${lastPress} ${entryVal}`
-            else
-                currLineText = entryVal
-
-            currVal *= parseInt(entryVal)
-            currLine.setText(currLineText)
-            lastPress = "*"
-
-            entryBox.setText(entryVal = "")
-        }
-    }).internalButton)
-
-    //= button functionality
-    functionButtons.append(new CalcButton("=", () => {
-
-        if (lastPress) {
-            if (lastPress === "+") {
-                currVal += parseInt(entryVal)
-            } else if (lastPress === "-") {
-                currVal -= parseInt(entryVal)
-            } else if (lastPress === "*") {
-                currVal *= parseInt(entryVal)
-            } else if (lastPress === "/") {
-                currVal /= parseInt(entryVal)
-            } else if (lastPress === "=") {
-                currVal = "lmao what"
             } else {
-                currVal = "stop it"
+                    currVal = Number(entryVal)
+                console.log("current val: " + currVal)
             }
+
+            entryVal = ""
+            entryBox.setText(entryVal)
+
         }
+    }
 
-        traceSpace.append(new Label(currVal))
-        entryVal = ""
-        currVal = ""
-        entryBox.setText(entryVal = "")
-        currLine = new Label()
-    }).internalButton)
+    functionButtons.append(
+        generateButton("+",
+            () => {
+                handlePrevPress(lastPress)
+                lastPress = "+"
+            })
+    )
 
-    functionButtons.append(new CalcButton("CE", () => {
+    functionButtons.append(
+        generateButton("-",
+            () => {
+                handlePrevPress(lastPress)
+                lastPress = "-"
+            })
+    )
 
+    functionButtons.append(
+        generateButton("=",
+            () => {
+                handlePrevPress(lastPress)
+                lastPress = undefined
+                traceSpace.append(new Label(currVal))
 
-        traceSpace.append(new Label("Stuff cleared"))
-        entryVal = ""
-        entryBox.setText(entryVal = "")
-        currVal = ""
-        currLine = new Label()
-    }).internalButton)
-
-
+            })
+    )
 
     left.append(functionButtons)
 
