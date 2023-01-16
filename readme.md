@@ -1,3 +1,11 @@
+# op.n calculator
+run `http://127.0.0.1:8080/?app=calculator.js` to get to the calculator.
+
+features: 
+* calculator trace
+* epic buttons!
+* poor handling of floating point numbers
+
 ## Running the app locally from your computer as you develop it
 Start a web server in the folder where index.html is located with the help of npm or python.
 
