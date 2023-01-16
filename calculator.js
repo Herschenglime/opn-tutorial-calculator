@@ -100,6 +100,17 @@ var main = function (args) {
 
     left.append(numberButtons)
 
+    function generateButton(label, action) {
+        return new CalcButton(label, action).internalButton
+    }
+
+    numberButtons.append(
+        generateButton(".", () => {
+            entryVal+= "."
+            entryBox.setText(entryVal)
+        })
+    )
+
     //whenClicked example
     // my_button.whenClicked().then((my_button)=>{
     //      console.log("I clicked the button!");
@@ -117,10 +128,6 @@ var main = function (args) {
     functionButtons.columns = 4
     functionButtons.orientation = 'matrix'
 
-
-    function generateButton(label, action) {
-        return new CalcButton(label, action).internalButton
-    }
 
     function handlePrevPress(lastPress) {
         if (entryVal !== "") {
@@ -143,12 +150,10 @@ var main = function (args) {
 
             } else {
                 currVal = Number(entryVal)
-                console.log("current val: " + currVal)
             }
 
             entryVal = ""
             entryBox.setText(entryVal)
-
         }
     }
 
@@ -204,7 +209,7 @@ var main = function (args) {
     functionButtons.append(
         generateButton("=",
             () => {
-                currLineText += `${entryVal}`
+                currLineText += `${entryVal} = `
                 currLine.setText(currLineText)
                 traceSpace.append(currLine)
 
