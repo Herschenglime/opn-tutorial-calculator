@@ -46,6 +46,26 @@ var main = function (args) {
 		}
 	})
 
+	// calc trace - placed up here because left affects it
+	var right = outer.getSecondContainer();
+    var rightLabel = new Label('Calculator trace')
+    right.append(rightLabel)
+
+	// Example on how to edit the style of a GUI Element
+	right.appendCustomStyle({
+		applyStyle: function (right) {
+			opn.set(right.div.style, {
+				//backgroundColor:'rgb(8,75,129)',
+				//maxWidth:'80px',
+				padding: '5px'
+			})
+		}
+	})
+
+    var traceSpace = new ElementGroup()
+    traceSpace.append(new Label("test"))
+
+    right.append(traceSpace)
 
 	var my_label = new Label("Calculator Entry");
 	left.append(my_label);
@@ -54,7 +74,7 @@ var main = function (args) {
 	entryBox.setEditable(false)
 	left.append(entryBox)
 
-
+    var entryVal = ''
 
 	var numberButtons = new ButtonGroup()
 	numberButtons.columns = 3
@@ -65,9 +85,10 @@ var main = function (args) {
 	for (let i = 7; i > 0; i -= 3) {
 
 		for (let j = 0; j < 3; j++) {
-			let passedButton = new CalcButton((i+j).toString()).internalButton
-			passedButton.action = () => console.log(i + " pressed")
-
+			let passedButton = new CalcButton((i+j).toString(), () => {
+                entryVal += i
+                entryBox.setText(entryVal)
+            }).internalButton
 
 			numberButtons.append(passedButton)
 		}
@@ -79,5 +100,16 @@ var main = function (args) {
 	// my_button.whenClicked().then((my_button)=>{
 	// 	console.log("I clicked the button!");
 	// })
+
+    //function buttons
+	var functionButtons = new ButtonGroup()
+	functionButtons.columns = 3
+	functionButtons.orientation = 'matrix'
+
+    functionButtons.append(new CalcButton("=", () => {
+
+    }).internalButton)
+
+    left.append(functionButtons)
 
 }

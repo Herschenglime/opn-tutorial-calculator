@@ -1,10 +1,10 @@
 preload(libs['GUI'])
 
 //Constructor of the class
-var CalcButton=function(label){
+var CalcButton=function(label, action){
 
     this.internalButton = new Button(label)
-    this.action = () => console.log(label + " button pressed!")
+    this.action = action
 
     this.internalButton.whenClicked().then(()=>{
         this.action()
