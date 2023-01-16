@@ -7,7 +7,7 @@ preload(libs['WebStyle']).before(function(args){
 
 
 //loading your local libraries
-//preload('MyElement.js');
+preload('CalcButton.js');
 
 //To run this test do send an HTTP request to index.html?app=gui_template.js
 
@@ -27,13 +27,13 @@ var main=function(args)
 
 	var myStyle=new WebStyle();
 	
-	var outter=new SplitLayout({parentDiv:area,orientation:'horizontal',sticky:'first',editable:true});
-	outter.setStickySize('400px');
-	outter.applyStyle(myStyle);
+	var outer=new SplitLayout({parentDiv:area,orientation:'horizontal',sticky:'first',editable:true});
+	outer.setStickySize('400px');
+	outer.applyStyle(myStyle);
 	
 	
 
-	var left=outter.getFirstContainer();
+	var left=outer.getFirstContainer();
 	
 	//Example on how to edit the style of a GUI Element
 	left.appendCustomStyle({

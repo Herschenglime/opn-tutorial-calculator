@@ -1,6 +1,6 @@
 
 //Constructor of the class
-var MyClass=function(input){
+var CalcButton=function(input){
 	
 	//define properties of the class like that
 	this.property1=100;
@@ -8,7 +8,7 @@ var MyClass=function(input){
 };
 
 //Define public methods of the class like that:
-MyClass.prototype.method1=function(input){
+CalcButton.prototype.method1=function(input){
 	
 	//if you have a local function defined inside a method it MUST be declared like that:
 	//DO NOT USE THE "function(arguments){...}" notation because you will not be able to access the keyword "this".
@@ -29,5 +29,5 @@ MyClass.prototype.method1=function(input){
 
 var main=function(args){
 	//Export the definition of this class like that:
-	exportData({MyClass:MyClass});	
+	exportData({CalcButton:CalcButton});
 }
